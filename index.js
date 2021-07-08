@@ -1,9 +1,7 @@
 /** KV のキー名 */
 const keyName = 'note';
 
-/**
- * エントリポイント
- */
+/** エントリポイント */
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request));
 });
@@ -15,6 +13,16 @@ addEventListener('fetch', event => {
  * @return {Response} Response
  */
 async function handleRequest(request) {
+  if(request.method === 'OPTIONS') {  // For CORS
+    return new Response(null, {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
+    });
+  }
   if(request.method === 'PUT') {
     const note = await request.text();
     return updateNote(note);
@@ -33,7 +41,10 @@ async function getNote() {
   if(note == null) return await updateNote(JSON.stringify({ text: 'First Note Created' }));
   return new Response(note, {
     status: 200,
-    headers: { 'content-type': 'application/json' }
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    }
   });
 }
 
@@ -50,11 +61,19 @@ async function updateNote(note) {
     if(parsed.text == null) throw new Error('Failed To JSON Parse : The [text] Property Does Not Exist');
   }
   catch(error) {
-    return new Response(error, { status: 500 });
+    return new Response(error, {
+      status: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
   }
   await kv.put(keyName, note);
   return new Response(note, {
     status: 200,
-    headers: { 'content-type': 'application/json' }
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    }
   });
 }
