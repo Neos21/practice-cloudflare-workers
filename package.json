@@ -1,0 +1,21 @@
+{
+  "name": "practice",
+  "version": "0.0.0",
+  "description": "Practice Cloudflare Workers",
+  "private": true,
+  "main": "index.js",
+  "author": "Neo <neos21@gmail.com> (https://neos21.net/)",
+  "license": "MIT",
+  "homepage": "https://github.com/Neos21/practice-cloudflare-workers#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neos21/practice-cloudflare-workers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Neos21/practice-cloudflare-workers/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Neos21"
+  }
+}

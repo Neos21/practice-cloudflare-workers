@@ -1,0 +1,21 @@
+# https://developers.cloudflare.com/workers/cli-wrangler/configuration
+
+# Worker 名 : `https://【この Worker 名】.【アカウント名】.workers.dev/` で公開できる
+name = "practice"
+# `$ worker build` コマンドでのビルド方法を指定する・`javascript` にすると Webpack が使われる
+type = "javascript"
+# `webpack.config.js` を自前で用意した場合は `webpack_config` プロパティで指定する : <https://developers.cloudflare.com/workers/cli-wrangler/webpack>
+
+# アカウント ID
+account_id = "07100c21a5c21a0afb93ab435ba46712"
+# `workers.dev` にデプロイする場合は `true` にする
+workers_dev = true
+# `workers.dev` ではなく独自ドメインで公開する際に指定する・`workers.dev` で公開する場合は空文字で良い
+route = ""
+# `workers.dev` で公開する場合は空文字で良い
+zone_id = ""
+
+# KV
+kv_namespaces = [
+  { binding = "kv", id = "32d76002a7784decb07151acf413098b", preview_id = "9f23b9bb89db4af7a2eca3230e50780f" }
+]
